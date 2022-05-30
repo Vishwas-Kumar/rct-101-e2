@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Product = () => {
+  const [product, setProduct] = useState([])
+  const getdata = ()=> {
+    axios.get(`http://localhost:8080/products`).then((res)=> {
+      console.log(res.data)
+      setProduct([...res.data])
+    })
+    .catch((err)=>console.log(err))
+  }
+
+  useEffect (()=> {
+    getdata()
+  },[])
   // TODO: Remove below const and instead import them from chakra
   const Text = () => <div />;
   const Image = () => <div />;
